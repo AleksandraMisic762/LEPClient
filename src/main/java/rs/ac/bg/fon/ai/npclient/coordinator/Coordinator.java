@@ -15,7 +15,7 @@ public class Coordinator {
     public final int MAX_BR_POKUSAJA;
     private static Coordinator instance;
     Locale aLocale = new Locale("sr", "RS");
-    ResourceBundle messages = ResourceBundle.getBundle("config/Messages", aLocale);
+    ResourceBundle messages = ResourceBundle.getBundle("rs.ac.bg.fon.ai.npclient.config/Messages", aLocale);
 
     private Coordinator() {
         MAX_BR_POKUSAJA = 3;
