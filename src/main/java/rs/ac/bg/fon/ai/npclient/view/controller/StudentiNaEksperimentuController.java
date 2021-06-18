@@ -1,7 +1,6 @@
 package rs.ac.bg.fon.ai.npclient.view.controller;
 
 import rs.ac.bg.fon.ai.npcommon.domain.Eksperiment;
-import rs.ac.bg.fon.ai.npcommon.domain.SE;
 import rs.ac.bg.fon.ai.npcommon.domain.Student;
 import rs.ac.bg.fon.ai.npclient.controller.KontrolerAL;
 import rs.ac.bg.fon.ai.npclient.coordinator.Coordinator;

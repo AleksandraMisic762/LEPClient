@@ -15,7 +15,7 @@ public class Coordinator {
     public final int MAX_BR_POKUSAJA;
     private static Coordinator instance;
     Locale aLocale = new Locale("sr", "RS");
-    ResourceBundle messages = ResourceBundle.getBundle("rs.ac.bg.fon.ai.npclient.config/Messages", aLocale);
+    ResourceBundle messages = ResourceBundle.getBundle("Messages", aLocale);
 
     private Coordinator() {
         MAX_BR_POKUSAJA = 3;
@@ -86,5 +86,17 @@ public class Coordinator {
         } catch (Exception ex) {
             
         }
+    }
+
+    public IzvestajStudentiSaUslovomController openIzvestajStudentiSaUslovomPanel() {
+        return new IzvestajStudentiSaUslovomController();
+    }
+    
+     public IzvestajSprovedeniEksperimentiController openIzvestajSprovedeniEksperimentiPanel() {
+        return new IzvestajSprovedeniEksperimentiController();
+    }
+     
+      public IzvestajUcescaNaEksperimentuController openIzvestajUcescaNaEksperimentuPanel() {
+        return new IzvestajUcescaNaEksperimentuController();
     }
 }

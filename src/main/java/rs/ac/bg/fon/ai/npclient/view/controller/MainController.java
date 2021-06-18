@@ -85,6 +85,27 @@ public class MainController {
                 addPanel(cntrl.getPanel());
             }
         });
+        frame.getMIIzvestajStudentiSaUslovom().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IzvestajStudentiSaUslovomController cntrl = Coordinator.getInstance().openIzvestajStudentiSaUslovomPanel();
+                addPanel(cntrl.getPanel());
+            }
+        });
+         frame.getMIIzvestajSprovedniEksperimenti().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IzvestajSprovedeniEksperimentiController cntrl = Coordinator.getInstance().openIzvestajSprovedeniEksperimentiPanel();
+                addPanel(cntrl.getPanel());
+            }
+        });
+          frame.getMIIzvestajUcesca().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IzvestajUcescaNaEksperimentuController cntrl = Coordinator.getInstance().openIzvestajUcescaNaEksperimentuPanel();
+                addPanel(cntrl.getPanel());
+            }
+        });
     }
     
     public void addPanel(JPanel panel){

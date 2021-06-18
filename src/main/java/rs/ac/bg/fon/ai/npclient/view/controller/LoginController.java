@@ -33,7 +33,6 @@ public class LoginController {
             private void loginUser(ActionEvent actionEvent) {
                 try {
                     String username = frame.getTxtKorisnickoIme().getText().trim();
-                    char[] psch = frame.getTxtPassword().getPassword();
                     String password = String.valueOf(frame.txtPassword.getPassword());
 
                     if (!validateForm(username, password)) {

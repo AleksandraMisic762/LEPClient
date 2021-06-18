@@ -53,6 +53,28 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="menuIzvestaj">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Izve&#x161;taj"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Studenti uslov"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mIIzvestajUcescaNaEksperimentu">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ucesca studenata"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mIIzvestajSprovedeniEksperiment">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sprovedeni eksperimenti"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

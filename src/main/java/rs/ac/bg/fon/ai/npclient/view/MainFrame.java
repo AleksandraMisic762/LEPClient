@@ -23,6 +23,10 @@ public class MainFrame extends javax.swing.JFrame {
         mIEksperimentator = new javax.swing.JMenuItem();
         mIRasporedEksperimenata = new javax.swing.JMenuItem();
         miSU = new javax.swing.JMenuItem();
+        menuIzvestaj = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mIIzvestajUcescaNaEksperimentu = new javax.swing.JMenuItem();
+        mIIzvestajSprovedeniEksperiment = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Klijent program");
@@ -55,6 +59,19 @@ public class MainFrame extends javax.swing.JFrame {
         menuEksperiment.add(miSU);
 
         jMenuBar1.add(menuEksperiment);
+
+        menuIzvestaj.setText("Izveštaj");
+
+        jMenuItem1.setText("Studenti uslov");
+        menuIzvestaj.add(jMenuItem1);
+
+        mIIzvestajUcescaNaEksperimentu.setText("Ucesca studenata");
+        menuIzvestaj.add(mIIzvestajUcescaNaEksperimentu);
+
+        mIIzvestajSprovedeniEksperiment.setText("Sprovedeni eksperimenti");
+        menuIzvestaj.add(mIIzvestajSprovedeniEksperiment);
+
+        jMenuBar1.add(menuIzvestaj);
 
         setJMenuBar(jMenuBar1);
 
@@ -96,18 +113,33 @@ public class MainFrame extends javax.swing.JFrame {
     public JMenuItem getMiSU() {
         return miSU;
     }
-    
-    
+
+    public JMenuItem getMIIzvestajStudentiSaUslovom() {
+        return jMenuItem1;
+    }
+
+    public JMenuItem getMIIzvestajUcesca() {
+        return mIIzvestajUcescaNaEksperimentu;
+    }
+
+    public JMenuItem getMIIzvestajSprovedniEksperimenti(){
+        return mIIzvestajSprovedeniEksperiment;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem mIEksperiment;
     private javax.swing.JMenuItem mIEksperimentator;
+    private javax.swing.JMenuItem mIIzvestajSprovedeniEksperiment;
+    private javax.swing.JMenuItem mIIzvestajUcescaNaEksperimentu;
     private javax.swing.JMenuItem mIListaStudenata;
     private javax.swing.JMenuItem mIRasporedEksperimenata;
     private javax.swing.JMenuItem mIStudent;
     private javax.swing.JMenuItem mIUcesce;
     private javax.swing.JMenu menuEksperiment;
+    private javax.swing.JMenu menuIzvestaj;
     private javax.swing.JMenu menuStudent;
     private javax.swing.JMenuItem miSU;
     // End of variables declaration//GEN-END:variables
