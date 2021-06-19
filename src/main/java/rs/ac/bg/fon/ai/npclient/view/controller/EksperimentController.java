@@ -9,11 +9,14 @@ import rs.ac.bg.fon.ai.npclient.view.panels.EksperimentPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 public class EksperimentController {
 
@@ -23,7 +26,7 @@ public class EksperimentController {
     public EksperimentController() {
         eksperiment = new Eksperiment();
         panel = new EksperimentPanel();
-        if(!prepareView()){
+        if (!prepareView()) {
             return;
         }
         addListeners();
@@ -48,13 +51,23 @@ public class EksperimentController {
         panel.getLblPretraga().setText(Coordinator.getInstance().getMessage("lbl_experiment_search"));
 
         try {
+            panel.getTxtDatum().setFormatterFactory(
+                    new DefaultFormatterFactory(
+                            new MaskFormatter("##-##-####")));
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("prepare_form_failed"));
+            Coordinator.getInstance().closeMainFrame();
+            return false;
+        }
+
+        try {
             List<Eksperimentator> listaEksperimentatora = new ArrayList<>();
 
             if (KontrolerAL.getInstance().ucitajListuEksperimentatora(listaEksperimentatora)) {
                 panel.getCbEksperimentator().setModel(new DefaultComboBoxModel<>(listaEksperimentatora.toArray()));
             } else {
                 throw new Exception();
-                
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("connection_failed"));
@@ -80,6 +93,7 @@ public class EksperimentController {
         panel.getBtnPretrazi().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String sifraUnos = panel.getTxtSifraEksperimenta().getText().trim();
 
                 String porukaIspravnostSifraEks = proveriSifruEksperimenta(sifraUnos);
@@ -108,11 +122,8 @@ public class EksperimentController {
 
                         panel.getTxtBodovi().setText(String.valueOf(eksperiment.getBodovi()));
                         if (eksperiment.getDatumOdrzavanja() != null) {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(new java.util.Date(eksperiment.getDatumOdrzavanja().getTime()));
+                            panel.getTxtDatum().setText(df.format(eksperiment.getDatumOdrzavanja()));
 
-//                            panel.getDateChooserCombo1().setSelectedDate(calendar);
-                            panel.getDateChooserCombo1().setDate(calendar.getTime());
                         }
                         if (eksperiment.getEksperimenatator().getIme() == null) {
                             panel.getCbEksperimentator().setSelectedIndex(-1);
@@ -157,18 +168,20 @@ public class EksperimentController {
             public void actionPerformed(ActionEvent e) {
                 String naziv = panel.getTxtNaziv().getText().trim();
                 String bodoviUneti = panel.getTxtBodovi().getText().trim();
-
-//                Date datumOdrzavanja = new Date(panel.getDateChooserCombo1().getSelectedDate().getTimeInMillis());
+                String datS = panel.getTxtDatum().getText();
 
                 
-                Date datumOdrzavanja = new Date(panel.getDateChooserCombo1().getCalendar().getTimeInMillis());
-                if (!proveriUnos(naziv, bodoviUneti, datumOdrzavanja)) {
+                String d = datS.substring(6,10) + "-" + datS.substring(3,5) + "-" +datS.substring(0,2);
+
+                Date datum = Date.valueOf(d);
+
+                if (!proveriUnos(naziv, bodoviUneti)) {
                     return;
                 }
 
                 int bodovi = Integer.parseInt(bodoviUneti);
                 Eksperimentator eksperimentator = (Eksperimentator) panel.getCbEksperimentator().getModel().getSelectedItem();
-                eksperiment = new Eksperiment(eksperiment.getSifra(), naziv, datumOdrzavanja, bodovi, eksperimentator, null);
+                eksperiment = new Eksperiment(eksperiment.getSifra(), naziv, datum, bodovi, eksperimentator, null);
 
                 try {
                     if (!KontrolerAL.getInstance().zapamtiEksperiment(eksperiment) || eksperiment.getSifra() == 0l) {
@@ -184,7 +197,7 @@ public class EksperimentController {
                 }
             }
 
-            private boolean proveriUnos(String naziv, String bodoviUneti, Date datumOdrzavanja) {
+            private boolean proveriUnos(String naziv, String bodoviUneti) {
                 if (naziv.equals("")) {
                     panel.getLblErrorNaziv().setText("Niste uneli naziv");
                     return false;

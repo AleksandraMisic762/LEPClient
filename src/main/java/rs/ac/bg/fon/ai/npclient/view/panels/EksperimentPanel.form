@@ -107,8 +107,11 @@
                           <Component id="cbEksperimentator" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="lblErrorDatumOdrzavanja" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="236" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblErrorDatumOdrzavanja" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDatum" min="-2" pref="227" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtBodovi" min="-2" pref="126" max="-2" attributes="0"/>
                               <Component id="lblErrorBodovi" min="-2" max="-2" attributes="0"/>
@@ -141,7 +144,10 @@
                       <Component id="lblDatumOdrzavanja" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtBodovi" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtBodovi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblErrorDatumOdrzavanja" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -230,6 +236,8 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtDatum">
         </Component>
       </SubComponents>
     </Container>

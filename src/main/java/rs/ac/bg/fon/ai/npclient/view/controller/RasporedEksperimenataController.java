@@ -10,12 +10,12 @@ import rs.ac.bg.fon.ai.npclient.view.util.EksperimentTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 public class RasporedEksperimenataController {
 
@@ -36,6 +36,17 @@ public class RasporedEksperimenataController {
         panel.getLblDtumDo().setText(Coordinator.getInstance().getMessage("lbl_schedule_to"));
 
         try {
+             panel.getTxtDatumOd().setFormatterFactory(
+                    new DefaultFormatterFactory(
+                            new MaskFormatter("##-##-####")));
+              panel.getTxtDatumDo().setFormatterFactory(
+                    new DefaultFormatterFactory(
+                            new MaskFormatter("##-##-####")));
+        } catch (ParseException e) {
+             JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("prepare_form_failed"));
+        }
+        
+        try {
             if (!KontrolerAL.getInstance().ucitajListuEksperimenata(new ArrayList<Eksperiment>())) {
                 throw new Exception();
             }
@@ -50,14 +61,17 @@ public class RasporedEksperimenataController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-//                Calendar calendar = panel.getdCDtumOd().getSelectedDate();
-                Date datumOd = new Date(panel.getdCDtumOd().getDate().getTime());
-//
-//                calendar = panel.getdCDtumDo().getSelectedDate();
-//
-//                Date datumDo = new Date(calendar.getTimeInMillis());
+                String datOdS = panel.getTxtDatumOd().getText();
 
-                Date datumDo = new Date(panel.getdCDtumDo().getDate().getTime());
+                String dOd = datOdS.substring(6, 10) + "-" + datOdS.substring(3, 5) + "-" + datOdS.substring(0, 2);
+
+                Date datumOd = Date.valueOf(dOd);
+                
+                String datDoS = panel.getTxtDatumDo().getText();
+
+                String dDo = datDoS.substring(6, 10) + "-" + datDoS.substring(3, 5) + "-" + datDoS.substring(0, 2);
+
+                Date datumDo = Date.valueOf(dDo);
 
                 if (datumDo.before(datumOd) || datumOd.equals(datumDo)) {
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("schedule_date_input_incorrect"));

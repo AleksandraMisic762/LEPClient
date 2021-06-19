@@ -1,9 +1,8 @@
 package rs.ac.bg.fon.ai.npclient.view.panels;
 
-import com.toedter.calendar.JCalendar;
-import java.sql.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -11,8 +10,6 @@ public class EksperimentPanel extends javax.swing.JPanel {
 
     public EksperimentPanel() {
         initComponents();
-        dateChooser = new JCalendar(new Date(System.currentTimeMillis()));
-        jPanel1.add(dateChooser);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +27,7 @@ public class EksperimentPanel extends javax.swing.JPanel {
         lblErrorDatumOdrzavanja = new javax.swing.JLabel();
         lblEksperimentator = new javax.swing.JLabel();
         cbEksperimentator = new javax.swing.JComboBox<>();
+        txtDatum = new javax.swing.JFormattedTextField();
         btnSacuvaj = new javax.swing.JButton();
         btnKreiraj = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -88,8 +86,10 @@ public class EksperimentPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cbEksperimentator, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblErrorDatumOdrzavanja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblErrorDatumOdrzavanja)
+                            .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBodovi, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblErrorBodovi)
@@ -114,7 +114,9 @@ public class EksperimentPanel extends javax.swing.JPanel {
                     .addComponent(lblBodovi, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDatumOdrzavanja))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBodovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBodovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblErrorDatumOdrzavanja)
@@ -223,10 +225,6 @@ public class EksperimentPanel extends javax.swing.JPanel {
         return cbEksperimentator;
     }
 
-    public JCalendar getDateChooserCombo1() {
-        return dateChooser;
-    }
-
     public JLabel getLblErrorBodovi() {
         return lblErrorBodovi;
     }
@@ -290,9 +288,10 @@ public class EksperimentPanel extends javax.swing.JPanel {
     public JLabel getLblPretraga() {
         return lblPretraga;
     }
-    
-    
-    private JCalendar dateChooser;
+
+    public JFormattedTextField getTxtDatum() {
+        return txtDatum;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreiraj;
     private javax.swing.JButton btnObrisi;
@@ -311,6 +310,7 @@ public class EksperimentPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblNaziv;
     private javax.swing.JLabel lblPretraga;
     private javax.swing.JTextField txtBodovi;
+    private javax.swing.JFormattedTextField txtDatum;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtSifraEksperimenta;
     // End of variables declaration//GEN-END:variables
