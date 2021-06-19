@@ -69,6 +69,7 @@ public class IzvestajStudentiSaUslovomController {
                     gson.toJson(predmet,file);
                     gson.toJson(studenti, file);
                     file.flush();
+                    file.close();
                     panel.getTxtPrikazIzvestaja().setText(gson.toJson(studenti));
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_created"));
                 } catch (Exception ex) {

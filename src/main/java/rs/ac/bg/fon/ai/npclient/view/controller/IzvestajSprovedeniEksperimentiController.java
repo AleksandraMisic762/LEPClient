@@ -53,6 +53,7 @@ public class IzvestajSprovedeniEksperimentiController {
                     }
                     gson.toJson(eksperimenti, file);
                     file.flush();
+                    file.close();
                     panel.getTxtPrikazIzvestaja().setText(gson.toJson(eksperimenti));
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_created"));
                 } catch (Exception ex) {

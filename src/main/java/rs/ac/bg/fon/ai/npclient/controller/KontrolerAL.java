@@ -313,7 +313,6 @@ public class KontrolerAL {
 	}
 
 	public boolean kreirajIzvestajSprovedenihEksperimenata(List<Eksperiment> eksperimenti) throws Exception {
-		
 		Request request = new Request(Operation.IZVESTAJ_SPROVEDENI_EKSPERIMENTI, eksperimenti);
 		sender.send(request);
 		Response response = (Response) receiver.receive();
