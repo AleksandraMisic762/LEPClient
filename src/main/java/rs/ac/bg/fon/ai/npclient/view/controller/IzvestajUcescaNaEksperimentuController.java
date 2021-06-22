@@ -2,6 +2,9 @@ package rs.ac.bg.fon.ai.npclient.view.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -15,6 +18,7 @@ import rs.ac.bg.fon.ai.npclient.controller.KontrolerAL;
 import rs.ac.bg.fon.ai.npclient.coordinator.Coordinator;
 import rs.ac.bg.fon.ai.npclient.view.panels.IzvestajUcescaNaEksperimentuPanel;
 import rs.ac.bg.fon.ai.npcommon.domain.Eksperiment;
+import rs.ac.bg.fon.ai.npcommon.domain.Predmet;
 import rs.ac.bg.fon.ai.npcommon.domain.Student;
 
 public class IzvestajUcescaNaEksperimentuController {
@@ -60,20 +64,23 @@ public class IzvestajUcescaNaEksperimentuController {
                     }
                     FileWriter file;
                     if (naziv.isEmpty()) {
-                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
                         file = new FileWriter("izvestaji/" + "izvestaj_ucesca_na_eksperimentu_" + df.format(new Date(System.currentTimeMillis())) + ".json");
                     
                     } else {
                         file = new FileWriter("izvestaji/" + naziv + ".json");
                     }
-                    gson.toJson(eksperiment,file);
-                    gson.toJson(studenti, file);
+                    
+                    JsonObject obj = new JsonObject();
+                    obj.add("eksperiment", gson.toJsonTree(eksperiment, Eksperiment.class));
+                    obj.add("studenti", gson.toJsonTree(studenti, new TypeToken<ArrayList<Student>>() {}.getType()));
+                    gson.toJson(obj, file);
                     file.flush();
                     file.close();
                     panel.getTxtPrikazIzvestaja().setText(gson.toJson(studenti));
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_created"));
                 } catch (Exception ex) {
-
+                	ex.printStackTrace();
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_not_created"));
                 }
             }

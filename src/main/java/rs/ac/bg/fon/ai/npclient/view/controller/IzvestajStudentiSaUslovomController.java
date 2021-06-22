@@ -2,6 +2,9 @@ package rs.ac.bg.fon.ai.npclient.view.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -60,20 +63,22 @@ public class IzvestajStudentiSaUslovomController {
                     }
                     FileWriter file;
                     if (naziv.isEmpty()) {
-                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
                         file = new FileWriter("izvestaji/" + "izvestaj_studenti_sa_uslovom_" + df.format(new Date(System.currentTimeMillis())) + ".json");
                     
                     } else {
                         file = new FileWriter("izvestaji/" + naziv + ".json");
                     }
-                    gson.toJson(predmet,file);
-                    gson.toJson(studenti, file);
+                    JsonObject obj = new JsonObject();
+                    obj.add("predmet", gson.toJsonTree(predmet, Predmet.class));
+                    obj.add("studenti", gson.toJsonTree(studenti, new TypeToken<ArrayList<Student>>() {}.getType()));
+                    gson.toJson(obj, file);
                     file.flush();
                     file.close();
                     panel.getTxtPrikazIzvestaja().setText(gson.toJson(studenti));
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_created"));
                 } catch (Exception ex) {
-
+                	ex.printStackTrace();
                     JOptionPane.showMessageDialog(panel, Coordinator.getInstance().getMessage("student_list_not_created"));
                 }
             }

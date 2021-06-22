@@ -45,7 +45,7 @@ public class IzvestajSprovedeniEksperimentiController {
                     }
                     FileWriter file;
                     if (naziv.isEmpty()) {
-                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
                         file = new FileWriter("izvestaji/" + "izvestaj_sprovedeni_eksperimenti_" + df.format(new Date(System.currentTimeMillis())) + ".json");
                     
                     } else {
